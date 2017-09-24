@@ -20,12 +20,14 @@ def stock_left():
         croplist = np.array(df[crop].tolist())
         sum1.append(np.sum(croplist))
 
-    print_obj = "\n".join("{}    \t{}".format(k, v) for k, v in zip(crops, sum1))
-    # print(print_obj)
-    f = open("Remaining Stock.txt", "w")
-    f.write(print_obj)
+    stock_dict = dict(zip(crops, sum1))
+    print(stock_dict)
+    prices = pd.DataFrame(list(stock_dict.items()), columns=["Commodity", "Stock Left"])
+    prices.to_csv("Remaining Stock.csv", index=False)
+    writer = pd.ExcelWriter('Remaining Stock.xlsx', engine='xlsxwriter')
+    prices.to_excel(writer, sheet_name='Stock', index=False)
 
-stock_left()
+# stock_left()
 
 
 def add_farmer(name, aadhar, email, phone):
@@ -53,7 +55,7 @@ def add_crop(crop_name):
     # print(df)
     df.to_csv(path, index=False)
 
-# add_crop("Crop 6")
+# add_crop("Coconut")
 
 
 def visualise():
@@ -69,4 +71,4 @@ def visualise():
     df3.to_excel(writer, sheet_name='Companies Log', index=False)
     writer.save()
 
-# visualise()
+visualise()

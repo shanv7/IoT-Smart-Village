@@ -8,11 +8,17 @@ import os
 import numpy as np
 import time
 import datetime
+import csv
 
 # TODO: Change Crop Names, Farmer Names.
 
 
 def farmers_entry(aadhar_number, crop, qty):
+
+    with open('Prices.csv', mode='r') as infile:
+        reader = csv.reader(infile)
+        with open('Temporary_Data.csv', mode='w') as outfile:
+            price_dict = {rows[0]: rows[1] for rows in reader}
 
     path = os.path.abspath("Farmers_Data_Is_In_This_File.csv")
     df = pd.read_csv(path)
@@ -49,6 +55,7 @@ def farmers_entry(aadhar_number, crop, qty):
     logf.to_csv(log_path, index=False)
     # print(logf)
 
-    # TODO: Return Print Price of Commodity
+    return price_dict[crop]
 
-farmers_entry(12341, "Crop 6", 100)
+r = farmers_entry(12345, "Banana", 100)
+print(r)
