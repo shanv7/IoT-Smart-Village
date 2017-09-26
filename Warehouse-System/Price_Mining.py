@@ -1,8 +1,14 @@
 """
 Mining Price of Commodities from Agmarknet
 
+Finds Latest Price of a commodity from real time Indian Government Website agmarknet
+
+Important Note:
 To get a list of Commodities Produced in your area:
 http://www.agmarknet.nic.in/agnew/NationalBEnglish/rpt5CommodityDailyReport.aspx
+
+Outputs:
+Updates Prices.xlsx, Prices.csv
 
 """
 
@@ -19,9 +25,6 @@ def update_price():
     ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 
-    date = str(int(st[8:10])-1)+"/"+st[5:7]+"/"+st[0:4]
-    # print(date)
-
     price_dict = dict()
 
     path = os.path.abspath("Farmers_Data_Is_In_This_File.csv")
@@ -31,25 +34,35 @@ def update_price():
 
     for commodity in commodity_list:
 
-        # commodity = "Banana"
-        website = "http://agmarknet.nic.in/cmm2_home.asp?comm="+commodity+"&dt="+date
+        markets = []
+        date = str(int(st[8:10])) + "/" + st[5:7] + "/" + st[0:4]
+        while "Mangalore" not in markets:
+            website = "http://agmarknet.nic.in/cmm2_home.asp?comm="+commodity+"&dt="+date
+            print(website)
 
-        html = requests.get(website).content
-        df_list = pd.read_html(html)
-        df = df_list[-1]
-        # print(df)
+            html = requests.get(website).content
+            df_list = pd.read_html(html)
+            df = df_list[-1]
+            # print(df)
 
-        # Removing Everything but Mangalore
+            # Removing Everything but Mangalore
 
-        markets = np.array(df[0].tolist())
-
+            markets = np.array(df[0].tolist())
+            if "Mangalore" in markets:
+                break
+            else:
+                current_date = int(date[0:2])
+                new_date = current_date-1
+                date = str(str(new_date)) + "/" + st[5:7] + "/" + st[0:4]
+                # print(date)
+                continue
         index_mangalore = np.argwhere(markets == "Mangalore")[0][0]
         modal_price = int(df.loc[index_mangalore, len(list(df))-1])
 
         price_dict[commodity] = modal_price
         # print(commodity, modal_price)
 
-    print(price_dict)
+    # print(price_dict)
     prices = pd.DataFrame(list(price_dict.items()), columns=["Commodity", "Price"])
     writer = pd.ExcelWriter('Prices.xlsx', engine='xlsxwriter')
     prices.to_csv("Prices.csv", index=False)

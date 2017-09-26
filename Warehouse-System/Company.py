@@ -1,5 +1,7 @@
 """
-Function to enable companies to buy stocks from the Warehouse
+Program to enable companies to buy stocks from the Warehouse.
+
+Updates Farmers' Database, Companies Log.
 
 """
 
@@ -70,27 +72,27 @@ def company_buys(name, crop, qty):
             if contribution[ijk] > 0:
                 email_list.append(all_email_list[ijk])
                 money_earned_list.append(money_earned[ijk])
-        # print(email_list)
-        # print(money_earned_list)
-
-        smtp_user = "warehousempproject@gmail.com"
-        smtp_pass = "Thisisawarehouse"
-        subject = "Your Crops have been bought"
-
-        s = smtplib.SMTP("smtp.gmail.com", 587)
-        s.ehlo()
-        s.starttls()
-        s.ehlo()
-        s.login(smtp_user, smtp_pass)
-
-        for i in range(len(email_list)):
-            header = "To: " + email_list[i] + "\nFrom: " + smtp_user + "\nSubject: " + subject
-            body = "Rupees " + str(money_earned_list[i]) + " has been added to your account"
-            s.sendmail(smtp_user, email_list[i], header + "\n\n" + body)
-
-        s.quit()
+        print(email_list)
+        print(money_earned_list)
+        
+        # smtp_user = "warehousempproject@gmail.com"
+        # smtp_pass = "Thisisawarehouse"
+        # subject = "Your Crops have been bought"
+        #
+        # s = smtplib.SMTP("smtp.gmail.com", 587)
+        # s.ehlo()
+        # s.starttls()
+        # s.ehlo()
+        # s.login(smtp_user, smtp_pass)
+        #
+        # for i in range(len(email_list)):
+        #     header = "To: " + email_list[i] + "\nFrom: " + smtp_user + "\nSubject: " + subject
+        #     body = "Rupees " + str(money_earned_list[i]) + " has been added to your account"
+        #     s.sendmail(smtp_user, email_list[i], header + "\n\n" + body)
+        #
+        # s.quit()
 
     else:
         print("Sorry! Stock of "+crop+" Left: "+str(sum1))
 
-company_buys("Nestle", "Banana", 10)
+company_buys("Nestle", "Banana", 100)

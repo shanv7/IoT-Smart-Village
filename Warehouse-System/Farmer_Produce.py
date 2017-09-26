@@ -1,5 +1,7 @@
 """
-To create a SQLite Database that can be queried.
+Program which allows a farmer to log in his/her porduce.
+
+Updates Farmers' Data, Farmers Log.
 
 """
 
@@ -9,8 +11,6 @@ import numpy as np
 import time
 import datetime
 import csv
-
-# TODO: Change Crop Names, Farmer Names.
 
 
 def farmers_entry(aadhar_number, crop, qty):
@@ -29,12 +29,12 @@ def farmers_entry(aadhar_number, crop, qty):
     aadhar_list = np.array(df["Aadhar Number"].tolist()).astype(int)
 
     rowpos = np.argwhere(aadhar_list == aadhar_number)
-    print(rowpos[0][0])
+    # print(rowpos[0][0])
 
     df.loc[rowpos[0][0], crop] += qty
 
     df.to_csv(path, index=False)
-    print(df)
+    # print(df)
 
     # Logging
 
@@ -57,5 +57,5 @@ def farmers_entry(aadhar_number, crop, qty):
 
     return price_dict[crop]
 
-r = farmers_entry(12345, "Banana", 100)
-print(r)
+r = farmers_entry(12343, "Rice", 500)
+# print(r)

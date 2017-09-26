@@ -9,7 +9,7 @@ import os
 import numpy as np
 
 
-def stock_left():
+def stock_left():  # Updates Remaining Stock.xlsx
     path = os.path.abspath("Farmers_Data_Is_In_This_File.csv")
     df = pd.read_csv(path)
 
@@ -21,7 +21,7 @@ def stock_left():
         sum1.append(np.sum(croplist))
 
     stock_dict = dict(zip(crops, sum1))
-    print(stock_dict)
+    # print(stock_dict)
     prices = pd.DataFrame(list(stock_dict.items()), columns=["Commodity", "Stock Left"])
     prices.to_csv("Remaining Stock.csv", index=False)
     writer = pd.ExcelWriter('Remaining Stock.xlsx', engine='xlsxwriter')
@@ -44,10 +44,10 @@ def add_farmer(name, aadhar, email, phone):
     # print(df)
     df.to_csv(path, index=False)
 
-# add_farmer("F6", 12341, "arvind0422@gmail.com", 9781110001)
+# add_farmer("Arvind", 12344, "arvind0422@gmail.com", 9999999994)
 
 
-def add_crop(crop_name):
+def add_crop(crop_name):  # Name of Crop must be written correctly.
     path = os.path.abspath("Farmers_Data_Is_In_This_File.csv")
     df = pd.read_csv(path)
     new_column = pd.DataFrame(np.zeros(len(df["Name"])))
@@ -58,7 +58,7 @@ def add_crop(crop_name):
 # add_crop("Coconut")
 
 
-def visualise():
+def visualise():  # Updates Warehouse.xlsx
     path1 = os.path.abspath("Farmers_Data_Is_In_This_File.csv")
     df1 = pd.read_csv(path1)
     path2 = os.path.abspath("Farmers_Events_Log.csv")
@@ -71,4 +71,4 @@ def visualise():
     df3.to_excel(writer, sheet_name='Companies Log', index=False)
     writer.save()
 
-visualise()
+# visualise()
