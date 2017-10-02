@@ -12,6 +12,7 @@ import time
 import datetime
 import csv
 import smtplib
+from admin_functions import visualise
 
 
 def company_buys(name, crop, qty):
@@ -60,6 +61,7 @@ def company_buys(name, crop, qty):
         logf = logf.append(pd.DataFrame(append_list, columns=["Timestamp", "Name", "Crop", "Quantity", "Price"]),
                            ignore_index="True")
         logf.to_csv(log_path, index=False)
+        visualise()
 
         # MAILING
 

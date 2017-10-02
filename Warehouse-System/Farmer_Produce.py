@@ -11,6 +11,7 @@ import numpy as np
 import time
 import datetime
 import csv
+from admin_functions import visualise
 
 
 def farmers_entry(aadhar_number, crop, qty):
@@ -56,6 +57,7 @@ def farmers_entry(aadhar_number, crop, qty):
     # print(logf)
 
     os.system("open Prices.xlsx")
+    visualise()
 
 # r = farmers_entry(12343, "Rice", 500)
 # print(r)

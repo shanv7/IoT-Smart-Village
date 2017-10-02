@@ -44,6 +44,7 @@ def add_farmer(name, aadhar, email, phone):
     df = df.append(pd.DataFrame([append_list], columns=list(df)), ignore_index="True")
     # print(df)
     df.to_csv(path, index=False)
+    visualise()
 
 # add_farmer("Arvind", 12344, "arvind0422@gmail.com", 9999999994)
 
@@ -55,6 +56,7 @@ def add_crop(crop_name):  # Name of Crop must be written correctly.
     df[crop_name] = new_column[0]
     # print(df)
     df.to_csv(path, index=False)
+    visualise()
 
 # add_crop("Coconut")
 
