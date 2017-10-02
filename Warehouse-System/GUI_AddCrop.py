@@ -39,4 +39,4 @@ def Add_Crops():
     b2.pack(side=LEFT, padx=5, pady=5)
     root.mainloop()
 
-Add_Crops()
+# Add_Crops()
