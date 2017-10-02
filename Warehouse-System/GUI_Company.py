@@ -1,16 +1,15 @@
 from tkinter import *
-from admin_functions import add_farmer
+from Company import company_buys
 
-fields = 'Name', 'Aadhar Number', 'eMail', 'Phone'
+fields = 'Company Name', 'Crop', 'Quantity'
 
 
 def fetch(entries):
     # field = entry[0]
     name = entries[0][1].get()
-    aadhar = int(entries[1][1].get())
-    email = entries[2][1].get()
-    phone = int(entries[3][1].get())
-    add_farmer(name, aadhar, email, phone)
+    crop = entries[1][1].get()
+    qty = int(entries[2][1].get())
+    company_buys(name, crop, qty)
 
 
 def makeform(root, fields):
@@ -26,15 +25,15 @@ def makeform(root, fields):
     return entries
 
 
-def Add_Farmers():
+def company_buy():
     root = Tk()
     ents = makeform(root, fields)
     root.bind('<Return>', (lambda event, e=ents: fetch(e)))
-    b1 = Button(root, text='Add',
+    b1 = Button(root, text='Buy',
                 command=(lambda e=ents: fetch(e)))
     b1.pack(side=LEFT, padx=5, pady=5)
     b2 = Button(root, text='Quit', command=root.quit)
     b2.pack(side=LEFT, padx=5, pady=5)
     root.mainloop()
 
-# Add_Farmers()
+# company_buy()

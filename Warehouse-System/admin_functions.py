@@ -26,6 +26,7 @@ def stock_left():  # Updates Remaining Stock.xlsx
     prices.to_csv("Remaining Stock.csv", index=False)
     writer = pd.ExcelWriter('Remaining Stock.xlsx', engine='xlsxwriter')
     prices.to_excel(writer, sheet_name='Stock', index=False)
+    os.system("open Remaining\ Stock.xlsx")
 
 # stock_left()
 
@@ -70,5 +71,6 @@ def visualise():  # Updates Warehouse.xlsx
     df2.to_excel(writer, sheet_name='Farmers Log', index=False)
     df3.to_excel(writer, sheet_name='Companies Log', index=False)
     writer.save()
+    os.system("open Warehouse.xlsx")
 
 # visualise()

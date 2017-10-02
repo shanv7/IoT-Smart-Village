@@ -5,7 +5,7 @@ Finds Latest Price of a commodity from real time Indian Government Website agmar
 
 Important Note:
 To get a list of Commodities Produced in your area:
-http://www.agmarknet.nic.in/agnew/NationalBEnglish/rpt5CommodityDailyReport.aspx
+http://www.agmarknet.nic.in/agnew/NationalBEnglish/CommodityDailyStateWise.aspx?ss=2
 
 Outputs:
 Updates Prices.xlsx, Prices.csv
@@ -23,7 +23,8 @@ import requests
 def update_price():
 
     ts = time.time()
-    st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+    st = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y')
+    print(st)
 
     price_dict = dict()
 
@@ -35,27 +36,39 @@ def update_price():
     for commodity in commodity_list:
 
         markets = []
-        date = str(int(st[8:10])) + "/" + st[5:7] + "/" + st[0:4]
-        while "Mangalore" not in markets:
+        date = st
+        for i in range(1, 100):
             website = "http://agmarknet.nic.in/cmm2_home.asp?comm="+commodity+"&dt="+date
-            print(website)
+            # print(website)
 
             html = requests.get(website).content
-            df_list = pd.read_html(html)
-            df = df_list[-1]
-            # print(df)
+            try:
+                df_list = pd.read_html(html)
+                df = df_list[-1]
+                # print(df)
 
-            # Removing Everything but Mangalore
+                # Removing Everything but Mangalore
 
-            markets = np.array(df[0].tolist())
-            if "Mangalore" in markets:
-                break
-            else:
-                current_date = int(date[0:2])
-                new_date = current_date-1
-                date = str(str(new_date)) + "/" + st[5:7] + "/" + st[0:4]
+                markets = np.array(df[0].tolist())
+                if "Mangalore" in markets:
+                    break
+                else:
+                    ts = time.time()
+                    date = datetime.datetime.fromtimestamp(ts).strftime('%Y/%m/%d')
+                    theday = datetime.date(*map(int, date.split('/')))
+                    prevday = theday - datetime.timedelta(days=i)
+                    date = prevday.strftime('%d/%m/%Y')
+                    # print(date)
+                    continue
+            except:
+                ts = time.time()
+                date = datetime.datetime.fromtimestamp(ts).strftime('%Y/%m/%d')
+                theday = datetime.date(*map(int, date.split('/')))
+                prevday = theday - datetime.timedelta(days=i)
+                date = prevday.strftime('%d/%m/%Y')
                 # print(date)
                 continue
+
         index_mangalore = np.argwhere(markets == "Mangalore")[0][0]
         modal_price = int(df.loc[index_mangalore, len(list(df))-1])
 
@@ -67,5 +80,5 @@ def update_price():
     writer = pd.ExcelWriter('Prices.xlsx', engine='xlsxwriter')
     prices.to_csv("Prices.csv", index=False)
     prices.to_excel(writer, sheet_name='Prices', index=False)
-
-update_price()
+    os.system("open Prices.xlsx")
+# update_price()

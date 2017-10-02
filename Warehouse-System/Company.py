@@ -41,7 +41,7 @@ def company_buys(name, crop, qty):
 
         new_croplist = croplist - contribution*qty
         df_append = pd.DataFrame(new_croplist)
-        df[crop] = df_append[0]  # TODO
+        df[crop] = df_append[0]
         # print(df)
 
         df.to_csv(path, index=False)
@@ -93,6 +93,8 @@ def company_buys(name, crop, qty):
         # s.quit()
 
     else:
-        print("Sorry! Stock of "+crop+" Left: "+str(sum1))
+        file_sorry = open("Sorry.txt", "w")
+        os.system("open Sorry.txt")  # TODO: Check if this works on RPi.
+        file_sorry.write("Sorry! Stock of "+crop+" Left: "+str(sum1))
 
-company_buys("Nestle", "Banana", 100)
+# company_buys("Nestle", "Banana", 100)
