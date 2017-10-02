@@ -2,6 +2,10 @@
 Admin Functions such as Stock left in every Crop,Visualising this data,
 Viewing Current Prices, Adding New Crops & Farmers
 
+Important Note:
+To get a list of Commodities Produced in your area:
+http://www.agmarknet.nic.in/agnew/NationalBEnglish/CommodityDailyStateWise.aspx?ss=2
+
 """
 
 import pandas as pd

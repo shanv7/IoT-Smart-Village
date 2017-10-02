@@ -1,6 +1,10 @@
 """
 User Interface to Mangage the Warehouse
 
+Important Note:
+To get a list of Commodities Produced in your area:
+http://www.agmarknet.nic.in/agnew/NationalBEnglish/CommodityDailyStateWise.aspx?ss=2
+
 """
 
 # TODO: Open Files Automatically.

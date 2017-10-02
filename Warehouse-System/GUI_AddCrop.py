@@ -1,5 +1,6 @@
 from tkinter import *
 from admin_functions import add_crop
+import webbrowser
 
 fields = ['Crop Name']
 
@@ -24,13 +25,18 @@ def makeform(root, fields):
 
 def Add_Crops():
     root = Tk()
+    # webbrowser.open("http://www.agmarknet.nic.in/agnew/NationalBEnglish/CommodityDailyStateWise.aspx?ss=2")
     ents = makeform(root, fields)
     root.bind('<Return>', (lambda event, e=ents: fetch(e)))
     b1 = Button(root, text='Add',
                 command=(lambda e=ents: fetch(e)))
     b1.pack(side=LEFT, padx=5, pady=5)
+    b3 = Button(root, text='Crops in Mangalore',
+                command=lambda:
+                webbrowser.open("http://www.agmarknet.nic.in/agnew/NationalBEnglish/CommodityDailyStateWise.aspx?ss=2"))
+    b3.pack(side=LEFT, padx=5, pady=5)
     b2 = Button(root, text='Quit', command=root.quit)
     b2.pack(side=LEFT, padx=5, pady=5)
     root.mainloop()
 
-# Add_Crops()
+Add_Crops()
