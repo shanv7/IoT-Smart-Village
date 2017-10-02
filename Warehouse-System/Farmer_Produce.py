@@ -56,8 +56,7 @@ def farmers_entry(aadhar_number, crop, qty):
     logf.to_csv(log_path, index=False)
     # print(logf)
 
-    os.system("open Prices.xlsx")
-    visualise()
+    os.system("open Farmers_Data_Is_In_This_File.csv")
 
 # r = farmers_entry(12343, "Rice", 500)
 # print(r)

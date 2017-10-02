@@ -2,12 +2,11 @@
 User Interface to Mangage the Warehouse
 
 Important Note:
-To get a list of Commodities Produced in your area:
+To get a list of Commodities Produced in your area, navigate through this website:
 http://www.agmarknet.nic.in/agnew/NationalBEnglish/CommodityDailyStateWise.aspx?ss=2
 
 """
 
-# TODO: Open Files Automatically.
 
 import tkinter as Tkinter
 from tkinter import *

@@ -24,7 +24,7 @@ def update_price():
 
     ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y')
-    print(st)
+    # print(st)
 
     price_dict = dict()
 
@@ -39,7 +39,7 @@ def update_price():
         date = st
         for i in range(1, 100):
             website = "http://agmarknet.nic.in/cmm2_home.asp?comm="+commodity+"&dt="+date
-            # print(website)
+            print(website)
 
             html = requests.get(website).content
             try:
@@ -58,7 +58,7 @@ def update_price():
                     theday = datetime.date(*map(int, date.split('/')))
                     prevday = theday - datetime.timedelta(days=i)
                     date = prevday.strftime('%d/%m/%Y')
-                    # print(date)
+                    print(date)
                     continue
             except:
                 ts = time.time()
@@ -66,7 +66,7 @@ def update_price():
                 theday = datetime.date(*map(int, date.split('/')))
                 prevday = theday - datetime.timedelta(days=i)
                 date = prevday.strftime('%d/%m/%Y')
-                # print(date)
+                print(date)
                 continue
 
         index_mangalore = np.argwhere(markets == "Mangalore")[0][0]
@@ -77,8 +77,9 @@ def update_price():
 
     # print(price_dict)
     prices = pd.DataFrame(list(price_dict.items()), columns=["Commodity", "Price"])
-    writer = pd.ExcelWriter('Prices.xlsx', engine='xlsxwriter')
+    # writer = pd.ExcelWriter('Prices.xlsx', engine='xlsxwriter')
     prices.to_csv("Prices.csv", index=False)
-    prices.to_excel(writer, sheet_name='Prices', index=False)
-    os.system("open Prices.xlsx")
+    # prices.to_excel(writer, sheet_name='Prices', index=False)
+    os.system("open Prices.csv")
+
 # update_price()

@@ -61,7 +61,7 @@ def company_buys(name, crop, qty):
         logf = logf.append(pd.DataFrame(append_list, columns=["Timestamp", "Name", "Crop", "Quantity", "Price"]),
                            ignore_index="True")
         logf.to_csv(log_path, index=False)
-        visualise()
+        os.system("open Farmers_Data_Is_In_This_File.csv")
 
         # MAILING
 
