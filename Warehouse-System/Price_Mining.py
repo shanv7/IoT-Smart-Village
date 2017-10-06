@@ -22,6 +22,7 @@ import requests
 
 def update_price():
 
+    os.system("scp pi@technopi.local:Warehouse/Farmers_Data_Is_In_This_File.csv /Users/Shantanu/Documents/git/Warehouse-System")
     ts = time.time()
     st = datetime.datetime.fromtimestamp(ts).strftime('%d/%m/%Y')
     # print(st)
@@ -82,4 +83,5 @@ def update_price():
     # prices.to_excel(writer, sheet_name='Prices', index=False)
     os.system("open Prices.csv")
 
+    os.system("scp /Users/Shantanu/Documents/git/Warehouse-System/Prices.csv pi@technopi.local:Warehouse/")
 # update_price()
