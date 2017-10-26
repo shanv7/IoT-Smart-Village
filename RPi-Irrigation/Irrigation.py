@@ -29,7 +29,7 @@ from numpy.random import randint as random
 
 def rain_prediction():
 
-    appid= "4699d113f68be6cb422c9bb2c2997623"
+    appid= "OPENWEATHERMAP-API-KEY"
     lat = "12.9807"  # LATITUDE
     lon = "74.8031"  # LONGITUDE
 
