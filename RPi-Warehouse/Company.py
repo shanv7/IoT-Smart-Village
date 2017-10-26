@@ -78,7 +78,7 @@ def company_buys(name, crop, qty):
         print(money_earned_list)
         
         smtp_user = "warehousempproject@gmail.com"
-        smtp_pass = "Thisisawarehouse"
+        smtp_pass = "PASSWORD"
         subject = "Your Crops have been bought"
 
         s = smtplib.SMTP("smtp.gmail.com", 587)
