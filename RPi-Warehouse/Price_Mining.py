@@ -68,7 +68,7 @@ def update_price():
                 index7 = data[index].replace(" ", "")
                 index8 = data[index + 1].replace(" ", "")
                 if index7 == "\n":
-                    index7 = "0"
+                    index7 = "1000000"
                 if index8 == "\n":
                     index8 = "1000000"
                 # print(index7, index8)
