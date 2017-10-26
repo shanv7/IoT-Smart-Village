@@ -25,7 +25,7 @@ top.title("Warehouse Management System - Raspberry Pi")
 
 A = Tkinter.Button(top, text="Visualise Database", command=lambda: visualise())
 B = Tkinter.Button(top, text="Remaining Stock", command=lambda: stock_left())
-C = Tkinter.Button(top, text="Update Price", command=lambda: update_price())
+C = Tkinter.Button(top, text="Update Prices", command=lambda: update_price())
 D = Tkinter.Button(top, text="Add New Farmer", command=lambda: Add_Farmers())
 E = Tkinter.Button(top, text="Add New Crop", command=lambda: Add_Crops())
 F = Tkinter.Button(top, text="Farmer Log", command=lambda: Farmer_Log())

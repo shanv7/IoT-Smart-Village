@@ -61,7 +61,7 @@ def company_buys(name, crop, qty):
         logf = logf.append(pd.DataFrame(append_list, columns=["Timestamp", "Name", "Crop", "Quantity", "Price"]),
                            ignore_index="True")
         logf.to_csv(log_path, index=False)
-        os.system("open Farmers_Data_Is_In_This_File.csv")
+        os.system("libreoffice Farmers_Data_Is_In_This_File.csv")
 
         # MAILING
 
@@ -77,26 +77,26 @@ def company_buys(name, crop, qty):
         print(email_list)
         print(money_earned_list)
         
-        # smtp_user = "warehousempproject@gmail.com"
-        # smtp_pass = "Thisisawarehouse"
-        # subject = "Your Crops have been bought"
-        #
-        # s = smtplib.SMTP("smtp.gmail.com", 587)
-        # s.ehlo()
-        # s.starttls()
-        # s.ehlo()
-        # s.login(smtp_user, smtp_pass)
-        #
-        # for i in range(len(email_list)):
-        #     header = "To: " + email_list[i] + "\nFrom: " + smtp_user + "\nSubject: " + subject
-        #     body = "Rupees " + str(money_earned_list[i]) + " has been added to your account"
-        #     s.sendmail(smtp_user, email_list[i], header + "\n\n" + body)
-        #
-        # s.quit()
+        smtp_user = "warehousempproject@gmail.com"
+        smtp_pass = "Thisisawarehouse"
+        subject = "Your Crops have been bought"
+
+        s = smtplib.SMTP("smtp.gmail.com", 587)
+        s.ehlo()
+        s.starttls()
+        s.ehlo()
+        s.login(smtp_user, smtp_pass)
+
+        for i in range(len(email_list)):
+            header = "To: " + email_list[i] + "\nFrom: " + smtp_user + "\nSubject: " + subject
+            body = "Rupees " + str(money_earned_list[i]) + " has been added to your account"
+            s.sendmail(smtp_user, email_list[i], header + "\n\n" + body)
+
+        s.quit()
 
     else:
         file_sorry = open("Sorry.txt", "w")
-        os.system("open Sorry.txt")  # TODO: Check if this works on RPi.
         file_sorry.write("Sorry! Stock of "+crop+" Left: "+str(sum1))
+        os.system("xdg-open Sorry.txt")  # TODO: Check if this works on RPi.
 
 # company_buys("Nestle", "Banana", 100)

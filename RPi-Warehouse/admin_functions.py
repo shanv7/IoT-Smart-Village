@@ -30,7 +30,7 @@ def stock_left():  # Updates Remaining Stock.xlsx
     prices.to_csv("Remaining Stock.csv", index=False)
     # writer = pd.ExcelWriter('Remaining Stock.xlsx', engine='xlsxwriter')
     # prices.to_excel(writer, sheet_name='Stock', index=False)
-    os.system("open Remaining\ Stock.csv")
+    os.system("libreoffice Remaining\ Stock.csv")
 
 # stock_left()
 
@@ -48,7 +48,7 @@ def add_farmer(name, aadhar, email, phone):
     df = df.append(pd.DataFrame([append_list], columns=list(df)), ignore_index="True")
     # print(df)
     df.to_csv(path, index=False)
-    os.system("open Farmers_Data_Is_In_This_File.csv")
+    os.system("libreoffice Farmers_Data_Is_In_This_File.csv")
 
 # add_farmer("Arvind", 12344, "arvind0422@gmail.com", 9999999994)
 
@@ -60,7 +60,7 @@ def add_crop(crop_name):  # Name of Crop must be written correctly.
     df[crop_name] = new_column[0]
     # print(df)
     df.to_csv(path, index=False)
-    os.system("open Farmers_Data_Is_In_This_File.csv")
+    os.system("libreoffice Farmers_Data_Is_In_This_File.csv")
 
 # add_crop("Coconut")
 
@@ -77,8 +77,8 @@ def visualise():  # Updates Warehouse.xlsx
     # df2.to_excel(writer, sheet_name='Farmers Log', index=False)
     # df3.to_excel(writer, sheet_name='Companies Log', index=False)
     # writer.save()
-    os.system("open Farmers_Data_Is_In_This_File.csv")
-    os.system("open Farmers_Events_Log.csv")
-    os.system("open Company_Events_Log.csv")
+    os.system("libreoffice Farmers_Data_Is_In_This_File.csv")
+    os.system("libreoffice Farmers_Events_Log.csv")
+    os.system("libreoffice Company_Events_Log.csv")
 
 # visualise()

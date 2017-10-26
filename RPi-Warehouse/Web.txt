@@ -1,0 +1,359 @@
+
+
+Mandi Prices
+
+
+
+
+<!--
+function sec1() {
+alert("Invalid Characters");
+}
+//-->
+
+
+<!--
+function validateName(theForm)
+{
+var reEval = new RegExp("[\\\\\:\*?\"\<\>\|\'\=\+\&\%\~\!\@\$\`\^\;]", "i");
+
+blnEval = reEval.test(theForm);
+
+if (blnEval)
+{
+alert("Enter Valid characters only");
+return false;
+}
+else
+{
+return true;
+}
+}
+
+
+//-->
+
+
+
+<!--
+function validatepwd(theForm)
+{
+var reEval = new RegExp("[\\\\\:\"\|\'\=\+\~\`\;]", "i");
+
+blnEval = reEval.test(theForm);
+
+if (blnEval)
+{
+alert("Enter Valid characters only");
+return false;
+}
+else
+{
+return true;
+}
+}
+
+
+//-->
+
+
+COMMODITY
+
+
+<!--
+function validateName(theForm)
+{
+var reEval = new RegExp("[\\\\\:\*?\"\<\>\|\'\=\+\&\%\~\!\@\#\$\`\^\;]", "i");
+
+blnEval = reEval.test(theForm);
+
+if (blnEval)
+{
+alert("Enter Valid characters only");
+return false;
+}
+else
+{
+return true;
+}
+}
+
+
+//-->
+
+
+
+<!--
+function validatepwd(theForm)
+{
+var reEval = new RegExp("[\\\\\:\"\|\'\=\+\~\`\;]", "i");
+
+blnEval = reEval.test(theForm);
+
+if (blnEval)
+{
+alert("Enter Valid characters only");
+return false;
+}
+else
+{
+return true;
+}
+}
+
+
+//-->
+
+
+
+<!--
+function over(element) {
+element.style.borderStyle= "solid";
+element.style.borderWidth = "0";
+element.style.borderColor = "#000000";
+element.style.backgroundColor = "#FFFFB7";
+element.style.cursor = "hand";
+}
+
+function out(element) {
+element.style.borderColor = "#D3A8FF";
+element.style.backgroundColor = "#D3A8FF"
+element.style.cursor = "default";
+
+}
+
+
+function over1(element) {
+element.style.borderStyle= "solid";
+element.style.borderWidth = "0";
+element.style.borderColor = "#000000";
+element.style.backgroundColor = "#A8FFA8";
+element.style.cursor = "hand";
+}
+
+ function out1(element) {
+element.style.borderColor = "rgb(187,119,255)";
+element.style.backgroundColor = "rgb(187,119,255)"
+element.style.cursor = "default";
+
+}
+
+ 
+
+//-->
+
+
+
+
+
+
+ 
+                                                                                                                                                                                                                                                                                                                       
+Market-wise Daily Report On
+24/10/2017  
+
+
+
+
+
+
+
+
+Commodity: Black pepper Variety wise
+
+  NR: Not Reported
+FAQ: Fair Average Quality
+
+
+Market
+Arrivals 
+      (Tonnes)
+Origin
+Variety
+Minimum
+      Price
+      (Rs./Quintal)
+Maximum
+      Price
+      (Rs./Quintal)
+Modal
+      Price
+      (Rs./Quintal)
+
+Karnataka 
+
+Mangalore  
+1  
+
+ 
+Malabar  
+30000  
+41000  
+37000  
+
+
+Moodigere  
+3  
+
+ 
+Other  
+38000  
+38000  
+38000  
+
+
+Sirsi  
+NR  
+
+ 
+Other  
+39610  
+39698  
+39650  
+
+
+Somvarpet  
+3  
+
+ 
+Malabar  
+40000  
+40000  
+40000  
+
+
+Yellapur  
+NR  
+
+ 
+Other  
+32107  
+36600  
+36600  
+
+Kerala 
+
+Adimali  
+0.1  
+
+ 
+Garbled  
+44700  
+44900  
+44800  
+
+
+&nbsp  
+&nbsp  
+ &nbsp 
+       
+Ungrabled  
+42700  
+42900  
+42800  
+
+
+Angamaly  
+0.1  
+
+ 
+Ungrabled  
+43000  
+45000  
+44000  
+
+
+Irikkur  
+0.03  
+
+ 
+Other  
+39000  
+39000  
+39000  
+
+
+Kalpetta  
+NR  
+
+ 
+Other  
+41000  
+42000  
+42000  
+
+
+Kanjangadu  
+3  
+
+ 
+Other  
+36900  
+37200  
+37000  
+
+
+Kannur  
+1  
+
+ 
+Other  
+39000  
+40000  
+39500  
+
+
+Payyannur  
+0.07  
+
+ 
+Other  
+38000  
+40000  
+39000  
+
+
+Perumbavoor  
+0.2  
+
+ 
+Garbled  
+41500  
+42500  
+42000  
+
+
+Taliparamba  
+0.5  
+
+ 
+Other  
+39000  
+40000  
+39600  
+
+
+Thodupuzha  
+0.5  
+
+ 
+Garbled  
+41500  
+42000  
+42000  
+
+
+&nbsp  
+&nbsp  
+ &nbsp 
+       
+Ungrabled  
+38500  
+39500  
+39000  
+
+
+
+ 
+
+
