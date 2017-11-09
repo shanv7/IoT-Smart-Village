@@ -44,7 +44,7 @@ def main():
 
         result = firebase1.get('/LocationOfConductor', None)
         k1 = result.keys()[len(result) - 2]
-        s = '{0:.2f} minutes'.format(result[k1]["Time"])
+        s = 'ETA: {0:.2f} mins'.format(result[k1]["Time"])
         lcd_string(s, LCD_LINE_1)
         sleep(20)
 
