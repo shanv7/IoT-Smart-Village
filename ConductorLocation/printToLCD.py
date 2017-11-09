@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 from time import sleep
+from firebase import firebase
 
 # Define GPIO to LCD mapping
 LCD_RS = 7
@@ -25,6 +26,7 @@ E_DELAY = 0.0005
 
 def main():
     # Main program block
+
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)  # Use BCM GPIO numbers
     GPIO.setup(LCD_E, GPIO.OUT)  # E
@@ -36,26 +38,15 @@ def main():
 
     # Initialise display
     lcd_init()
+    firebase1 = firebase.FirebaseApplication('https://location-tracking-44232.firebaseio.com/', None)
 
     while True:
-        # Send some test
-        lcd_string("Electronics Hub ", LCD_LINE_1)
-        lcd_string("    Presents    ", LCD_LINE_2)
 
-        sleep(3)  # 3 second delay
-
-        # Send some text
-        lcd_string("Rasbperry Pi", LCD_LINE_1)
-        lcd_string("16x2 LCD Test", LCD_LINE_2)
-
-        sleep(3)  # 3 second delay
-
-        # Send some text
-        lcd_string("1234567890*@$#%&", LCD_LINE_1)
-        lcd_string("abcdefghijklmnop", LCD_LINE_2)
-
-        sleep(3)
-
+        result = firebase1.get('/LocationOfConductor', None)
+        k1 = result.keys()[len(result) - 2]
+        s = '{0:.2f} minutes'.format(result[k1]["Time"])
+        lcd_string(s, LCD_LINE_1)
+        sleep(20)
 
 def lcd_init():
     lcd_display(0x28, LCD_CMD)  # Selecting 4 - bit mode with two rows
