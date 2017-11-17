@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.location.LocationListener;
@@ -34,6 +35,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -44,8 +46,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationClient;
     public static final int REQUEST_LOCATION = 99;
-    private double longitude;
-    private double latitude;
     private LocationRequest mLocationRequest;
     private Marker mCurrLocationMarker;
     private String mLastUpdateTime;
@@ -54,12 +54,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     DatabaseReference myRef;
     private float time;
     private float distancetoNITK;
+    FirebaseDatabase database;
+    private String MYTAG = "HEY";
+    private Integer latest=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Firebase.setAndroidContext(this);
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://location-tracking-44232.firebaseio.com/");
+        database = FirebaseDatabase.getInstance();//"https://location-tracking-44232.firebaseio.com/"
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -67,9 +69,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-       // myFirebaseRef = new Firebase("https://location-tracking-44232.firebaseio.com");
-
-        myRef = database.getReference("LocationOfConductor");
+        myRef = database.getReference("LocationOfConductor");//"LocationOfConductor"
+        myRef.removeValue();
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -152,22 +153,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Location locationNITK = new Location(location);
         locationNITK.setLatitude(12.9141);
         locationNITK.setLongitude(74.8560);
-        distancetoNITK = location.distanceTo(locationNITK);
-        if (!location.hasSpeed()) {
-            speed = 20000.0f / 60.0f;
+
+//        Location locationNITK = new Location(location);
+//        locationNITK.setLatitude(12.9807);
+//        locationNITK.setLongitude(74.8031);
+
+        distancetoNITK = location.distanceTo(locationNITK) + 10000.0f;
+        if (location.getSpeed() < 15.0) {
+            speed = 47000.0f / 60.0f; //Speed in meters/min
         }
 
         else{
             speed = location.getSpeed();
         }
 
+        //Log.d(MYTAG,"Speed is: " + speed );
+        //Log.d(MYTAG, "Time is: "+ time);
         time = distancetoNITK/speed;
-
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        dateFormat.setTimeZone(TimeZone.getTimeZone("IST"));
         Date date = new Date();
         mLastUpdateTime = dateFormat.format(date);
-
         saveToFirebase();
 
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -181,6 +187,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void saveToFirebase() {
+        //myRef.removeValue();
         Map mLocations = new HashMap();
         mLocations.put("Timestamp", mLastUpdateTime);
         Map mCoordinate = new HashMap();
@@ -189,8 +196,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLocations.put("Location", mCoordinate);
         mLocations.put("Time",time);
         mLocations.put("Distance to Mangalore", distancetoNITK);
-        myRef.push().setValue(mLocations);
-        Toast.makeText(getApplicationContext(),"ADDED TO FIREBASE", Toast.LENGTH_LONG).show();
+        try {
+            String temp = "E" + latest.toString();
+            latest++;
+            myRef.child(temp).setValue(mLocations);
+            Toast.makeText(getApplicationContext(), "ADDED TO FIREBASE", Toast.LENGTH_LONG).show();
+        }catch(Exception e){
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "NOT ADDED", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
